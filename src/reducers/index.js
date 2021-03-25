@@ -1,19 +1,19 @@
 import { ADD_ONE, APPLY_NUMBER, CHANGE_OPERATION } from './../actions';
 
 export const initialState = {
-    total: 100,
+    total: 0,
     operation: "*",
-    memory: 100
+    memory: 0
 }
 
-const calculateResult = (num1, num2, operation) => {
+export const calculateResult = (num1, num2, operation) => {
     switch(operation) {
         case("+"):
-            return num1 + num2;
+            return num1 + num2
         case("*"):
-            return num1 * num2;
+            return num1 * num2
         case("-"):
-            return num1 - num2;
+            return num1 - num2
     }
 }
 
@@ -38,8 +38,8 @@ const reducer = (state, action) => {
             });
             
         default:
-            return state;
+            return state
     }
 }
 
-export default reducer;
+export default reducer
