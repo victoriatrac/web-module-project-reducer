@@ -5,9 +5,14 @@ import './App.css'
 import TotalDisplay from './components/TotalDisplay'
 import CalcButton from './components/CalcButton'
 
-import reducer, { calculateResult, initialState } from './reducers/index'
-
-import applyNumber from './actions/index'
+import reducer, { initialState } from './reducers/index'
+import applyNumber, { 
+  changeOperation,
+  clearDisplay,
+  memorySet,
+  memoryApply,
+  memoryClear
+} from './actions/index'
 
 function App() {
   const [ state, dispatch ] = useReducer(reducer, initialState)
@@ -30,9 +35,24 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton
+                value={"M+"}
+                onClick={() => {
+                  dispatch(memorySet(state.total))
+                }}
+              />
+              <CalcButton
+                value={"MR"}
+                onClick={() => {
+                  dispatch(memoryApply(state.total))
+                }}
+              />
+              <CalcButton
+                value={"MC"}
+                onClick={() => {
+                  dispatch(memoryClear())
+                }}
+              />
             </div>
 
             <div className="row">
@@ -99,13 +119,33 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"+"}/>
-              <CalcButton value={"*"}/>
-              <CalcButton value={"-"}/>
+              <CalcButton
+                value={"+"}
+                onClick={() => {
+                  dispatch(changeOperation('+'))
+                }}
+              />
+              <CalcButton
+                value={"*"}
+                onClick={() => {
+                  dispatch(changeOperation('*'))
+                }}
+              />
+              <CalcButton
+                value={"-"}
+                onClick={() => {
+                  dispatch(changeOperation('-'))
+                }}
+              />
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton
+                value={"CE"}
+                onClick={() => {
+                  dispatch(clearDisplay())
+                }}
+              />
             </div>
 
           </form>
